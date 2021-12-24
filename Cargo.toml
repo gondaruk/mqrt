@@ -1,0 +1,41 @@
+[package]
+name = "mqrt"
+description = "A lightweight tool that listens for MQTT events and triggers MQTT actions"
+readme = "README.md"
+version = "0.1.0"
+authors = ["Nazar Gondaruk <nazar.gondaruk@gmail.com>"]
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+# Logging
+log = "0.4.0"
+env_logger = "0.8.4"
+rand = "0.8.4"
+
+# Config
+structopt = "0.3.25"
+
+# Async / Tokio / Futures
+tokio = { version = "1.15.0", features = ["full"] }
+tokio-stream = "0.1"
+futures = "0.3.17"
+futures-util = "0.3.17"
+async-trait = "0.1.52"
+
+# Serialization / Deserialization
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.5.8"
+serde_json = "1.0.73"
+
+# Structures / Iterators
+itertools = "0.10.3"
+bytes = { version = "1", features = ["serde"] }
+
+# Mqtt
+# TODO: ssl support (https://github.com/eclipse/paho.mqtt.rust/issues/57)
+paho-mqtt = { version = "0.9", default-features = false, features = ["bundled"] }
+
+# Eval JS
+# TODO: tokio feature
+rquickjs = { git = "https://github.com/gondaruk/rquickjs" }

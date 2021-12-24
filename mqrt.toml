@@ -1,0 +1,55 @@
+[input._]
+type = "mqtt"
+host = "127.0.0.1"
+port = 1883
+
+[input._.trigger.in1]
+topic = 'in/1'
+
+[input._.trigger.in2]
+topic = 'in/2'
+
+[output._]
+type = "mqtt"
+host = "127.0.0.1"
+port = 1883
+
+[output._.action.out1]
+topic = 'out/1'
+
+[output._.action.out2]
+topic = 'out/2'
+payload = { type = 'static', data = 'hello' }
+
+[output._.action.out3]
+topic = 'out/3'
+payload = { type = 'js', code = '''
+let x = JSON.parse(payload);
+x.num += 1;
+return JSON.stringify(x);
+''' }
+
+[output._.action.out4]
+topic = 'out/4'
+
+[output._.action.outHALL]
+topic = 'out/4'
+payload = { type = 'js', code = '''
+let x = JSON.parse(payload); return x['action'];
+''' }
+
+[[handler]]
+on = { input = "_", trigger = "in1" }
+do = { output = "_", action = "out1" }
+
+[[handler]]
+on = { input = "_", trigger = "in2" }
+do = { output = "_", action = "out2" }
+
+[[handler]]
+on = { input = "_", trigger = "in2" }
+do = { output = "_", action = "out3" }
+
+[[handler]]
+on = { input = "_", trigger = "in2" }
+do = { output = "_", action = "out4" }
