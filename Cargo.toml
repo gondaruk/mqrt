@@ -7,6 +7,36 @@ authors = ["Nazar Gondaruk <nazar.gondaruk@gmail.com>"]
 edition = "2021"
 license = "MIT"
 
+[package.metadata.deb]
+section = "admin"
+priority = "optional"
+license-file = ["LICENSE", "2"]
+maintainer-scripts = "distribution/debian/scripts/"
+conf-files = ["/etc/mqrt/mqrt.toml"]
+assets = [
+    ["target/release/mqrt", "/usr/bin/", "755"],
+    ["distribution/config/mqrt.toml", "/etc/mqrt/mqrt.toml", "644"],
+    ["distribution/systemd/mqrt.service", "/lib/systemd/system/mqrt.service", "644"],
+]
+
+[package.metadata.deb.systemd-units]
+unit-scripts = "distribution/systemd/"
+
+[package.metadata.deb.variants.armv7-unknown-linux-gnueabihf]
+depends = "libc6 (>= 2.15)"
+
+[package.metadata.deb.variants.x86_64-unknown-linux-gnu]
+depends = "libc6 (>= 2.15)"
+
+[package.metadata.deb.variants.x86_64-unknown-linux-musl]
+depends = ""
+
+[package.metadata.deb.variants.aarch64-unknown-linux-gnu]
+depends = "libc6 (>= 2.18)"
+
+[package.metadata.deb.variants.aarch64-unknown-linux-musl]
+depends = ""
+
 [dependencies]
 # Logging
 log = "0.4.0"

@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# Taken from https://github.com/vectordotdev/vector/blob/master/scripts/version.sh
 
-# version.sh
-#
-# SUMMARY
-#
-#   Responsible for computing the release version of Mqrt.
-#   This is based on version in Cargo.toml.
+set -euo pipefail
 
 VERSION="${VERSION:-"$(awk -F ' = ' '$1 ~ /version/ { gsub(/["]/, "", $2); printf("%s",$2) }' Cargo.toml)"}"
 echo "$VERSION"

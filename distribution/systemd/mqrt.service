@@ -1,0 +1,13 @@
+[Unit]
+Description=MQRT
+Documentation=https://github.com/gondaruk/mqrt
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+User=mqrt
+Group=mqrt
+ExecStart=/usr/bin/mqrt
+
+[Install]
+WantedBy=multi-user.target

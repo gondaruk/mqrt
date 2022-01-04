@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# Add mqrt:mqrt user & group
+id --user mqrt >/dev/null 2>&1 || \
+  useradd --system --shell /sbin/nologin --home-dir /var/lib/mqrt --user-group \
+    --comment "MQRT - simple MQTT data router" mqrt
+
+# Create home directory
+mkdir -p /var/lib/mqrt
+
+# Make mqrt:mqrt the owner of the home directory
+chown -R mqrt:mqrt /var/lib/mqrt
+
+#DEBHELPER#
