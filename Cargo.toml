@@ -47,7 +47,7 @@ rand = "0.8.4"
 structopt = "0.3.25"
 
 # Async / Tokio / Futures
-tokio = { version = "1.15.0", features = ["full"] }
+tokio = { version = "1.18.4", features = ["full"] }
 tokio-stream = "0.1"
 futures = "0.3.17"
 futures-util = "0.3.17"
